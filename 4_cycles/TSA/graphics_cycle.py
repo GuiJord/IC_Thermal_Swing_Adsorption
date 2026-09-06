@@ -1,0 +1,283 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+def plot_P_time():
+    plt.figure(figsize=(9, 4))
+    plt.plot(t, P_ad[0,:],color='black')
+    plt.ylabel('Pressure [-]')
+    plt.xlabel('Time [-]')
+    plt.xlim(left=0)
+    plt.tight_layout()
+    plt.ticklabel_format(style='plain', useOffset=False)
+    plt.savefig('pressure_time.png',dpi=200)
+    plt.close()
+
+def plot_P_column():
+    plt.figure(figsize=(9, 4))
+    plt.plot(z, P_ad[:,-1],color='black')
+    plt.ylabel('Pressure [-]')
+    plt.xlabel('Z [-]')
+    plt.xlim(left=0)
+    plt.tight_layout()
+    plt.ticklabel_format(style='plain', useOffset=False)
+    plt.savefig('pressure_column.png',dpi=200)
+    plt.close()
+
+def plot_Tw_time():
+    plt.figure(figsize=(9, 4))
+    plt.plot(t, Tw_ad[0,:],color='lime')
+    plt.axvline(t_ads[-1],ls='--',color='grey')
+    plt.axvline(t_heat[-1]+t_ads[-1],ls='--',color='grey')
+    plt.axvline(t_cool[-1]+t_ads[-1]+t_heat[-1],ls='--',color='grey')
+    plt.ylabel('Tw [-]')
+    plt.xlabel('Time [-]')
+    plt.xlim(left=0)
+    plt.tight_layout()
+    plt.savefig('temperature_wall_time.png',dpi=200)
+    plt.close()
+
+def plot_Tw_column():
+    plt.figure(figsize=(9, 4))
+    plt.plot(z, Tw_ad_ads[:,-1],color='r', label='ads')
+    plt.plot(z, Tw_ad_heat[:,-1],color='b', label='heat')
+    plt.plot(z, Tw_ad_cool[:,-1],color='lime', label='cool')
+    plt.ylabel('Tw [-]')
+    plt.xlabel('Z [-]')
+    plt.xlim(left=0)
+    plt.xlim(right=1)
+    plt.legend()
+    plt.tight_layout()
+    plt.savefig('temperature_wall_column.png',dpi=200)
+    plt.close()
+
+def plot_T_time():
+    plt.figure(figsize=(9, 4))
+    plt.plot(t, T_ad[0,:],color='lime')
+    plt.ylabel('T [-]')
+    plt.xlabel('Time [-]')
+    plt.axvline(t_ads[-1],ls='--',color='grey')
+    plt.axvline(t_heat[-1]+t_ads[-1],ls='--',color='grey')
+    plt.axvline(t_cool[-1]+t_ads[-1]+t_heat[-1],ls='--',color='grey')
+    # plt.ylim(0.8, 1.4)
+    # plt.xlim(0, 8000)
+    plt.xlim(left=0)
+    plt.tight_layout()
+    plt.ticklabel_format(style='plain', useOffset=False)
+    plt.savefig('temperature_time.png',dpi=200)
+    plt.close()
+
+def plot_T_column():
+    plt.figure(figsize=(9, 4))
+    plt.plot(z, T_ad_ads[:,-1],color='r', label='ads')
+    plt.plot(z, T_ad_heat[:,-1],color='b', label='heat')
+    plt.plot(z, T_ad_cool[:,-1],color='lime', label='cool')
+    plt.ylabel('T [-]')
+    plt.xlabel('Z [-]')
+    # plt.ylim(0.96, 1.04)
+    # plt.xlim(0,1)
+    plt.xlim(left=0)
+    plt.xlim(right=1)
+    plt.legend()
+    plt.tight_layout()
+    plt.ticklabel_format(style='plain', useOffset=False)
+    plt.savefig('temperature_column.png',dpi=200)
+    plt.close()
+
+def plot_v_time():
+    plt.figure(figsize=(9, 4))
+    plt.plot(t, v_ad[:],color='dodgerblue')
+    plt.ylabel('v [-]')
+    plt.xlabel('Time [-]')
+    # plt.ylim(0.8, 1.4)
+    # plt.xlim(0, 8000)
+    plt.xlim(left=0)
+    plt.tight_layout()
+    plt.savefig('velocity_time.png',dpi=200)
+    plt.close()
+
+def plot_v_column():
+    plt.figure(figsize=(9, 4))
+    # plt.plot(z, v_ad[:,-1],color='dodgerblue')
+    plt.ylabel('v [-]')
+    plt.xlabel('Z [-]')
+    # plt.ylim(0.8, 1.4)
+    # #plt.xlim(0, 15)
+    plt.xlim(left=0)
+    plt.tight_layout()
+    plt.savefig('velocity_column.png',dpi=200)
+    plt.close()
+
+def plot_x_time():
+    plt.figure(figsize=(9, 4))
+    plt.plot(t, x_CO2[0,:],color='r', label='CO2')
+    plt.axvline(t_ads[-1],ls='--',color='grey')
+    plt.axvline(t_heat[-1]+t_ads[-1],ls='--',color='grey')
+    plt.axvline(t_cool[-1]+t_ads[-1]+t_heat[-1],ls='--',color='grey')
+    # plt.plot(t, x_N2[-1,:],color='turquoise', label='N2')
+    # plt.ylabel('q/q$_0$ [-]')
+    plt.ylabel('x$_{CO2}$ [-]')
+    plt.xlabel('Time [-]')
+    plt.xlim(left=0)
+    plt.legend()
+    plt.tight_layout()
+    plt.ticklabel_format(style='plain', useOffset=False)
+    plt.savefig('x_time.png',dpi=200)
+    plt.close()
+
+def plot_x_column():
+    plt.figure(figsize=(9, 4))
+    plt.plot(z, x_CO2_ads[:,-1],color='r', label='ads')
+    plt.plot(z, x_CO2_heat[:,-1],color='b', label='heat')
+    plt.plot(z, x_CO2_cool[:,-1],color='lime', label='cool')
+    # plt.plot(z, x_N2[:,-1],color='turquoise', label='N2')
+    # plt.ylabel('q/q$_0$ [-]')
+    plt.ylabel('x$_{CO2}$ [-]')
+    plt.xlabel('Z [-]')
+    plt.xlim(left=0)
+    plt.xlim(right=1)
+    plt.legend()
+    plt.tight_layout()
+    plt.ticklabel_format(style='plain', useOffset=False)
+    plt.savefig('x_column.png',dpi=200)
+    plt.close()
+
+def plot_y_time():
+    y_N2 = 1 - y_CO2
+
+    plt.figure(figsize=(9, 4))
+    plt.plot(t, y_CO2[0,:],color='r', label='CO2',lw=2)
+    plt.axvline(t_ads[-1],ls='--',color='grey')
+    plt.axvline(t_heat[-1]+t_ads[-1],ls='--',color='grey')
+    plt.axvline(t_cool[-1]+t_ads[-1]+t_heat[-1],ls='--',color='grey')
+
+    # plt.plot(t, y_N2[-1,:],color='turquoise', label='N2')
+    plt.ylabel('y$_{CO2}$')
+    plt.xlabel('Time [-]')
+    plt.xlim(left=0)
+    # plt.xlim(0,8000)
+    # plt.ylim(0,0.16)
+    # plt.locator_params(axis='x', nbins=)
+    plt.legend()
+    plt.tight_layout()
+    plt.ticklabel_format(style='plain', useOffset=False)
+    plt.savefig('y_time.png',dpi=200)
+    plt.close()
+
+    
+    # plt.figure(figsize=(5, 4))
+    # plt.plot(t, y_CO2[-1,:],color='r', label='CO2',lw=2)
+    # # plt.plot(t, y_N2[-1,:],color='turquoise', label='N2')
+    # plt.ylabel('y$_{CO2}$')
+    # plt.xlabel('Time [-]')
+    # plt.xlim(490,550)
+    # plt.ylim(0,0.14)
+    # # plt.locator_params(axis='x', nbins=)
+    # plt.legend()
+    # plt.tight_layout()
+    # plt.ticklabel_format(style='plain', useOffset=False)
+    # plt.savefig('y_time_first_peak.png',dpi=200)
+    # plt.close()
+
+
+    # plt.figure(figsize=(5, 4))
+    # plt.plot(t, y_CO2[-1,:],color='r', label='CO2',lw=2)
+    # # plt.plot(t, y_N2[-1,:],color='turquoise', label='N2')
+    # plt.ylabel('y$_{CO2}$')
+    # plt.xlabel('Time [-]')
+    # plt.xlim(3000,4400)
+    # plt.ylim(0.12,0.16)
+    # plt.locator_params(axis='y', nbins=5)
+    # # plt.locator_params(axis='x', nbins=)
+    # plt.legend()
+    # plt.tight_layout()
+    # plt.ticklabel_format(style='plain', useOffset=False)
+    # plt.savefig('y_time_second_peak.png',dpi=200)
+    # plt.close()
+
+
+def plot_y_column():
+    y_N2 = 1 - y_CO2
+
+    plt.figure(figsize=(9, 4))
+    plt.plot(z, y_CO2_ads[:,-1],color='r', label='ads')
+    plt.plot(z, y_CO2_heat[:,-1],color='b', label='heat')
+    plt.plot(z, y_CO2_cool[:,-1],color='lime', label='cool')
+    # plt.plot(z, y_N2[:,-1],color='turquoise', label='N2')
+    plt.ylabel('y$_{CO2}$')
+    plt.xlabel('Z [-]')
+    plt.xlim(0,1)
+    # plt.ylim(0,1)
+    plt.legend()
+    plt.tight_layout()
+    plt.ticklabel_format(style='plain', useOffset=False)
+    plt.savefig('y_column.png',dpi=200)
+    plt.close()
+
+
+# test_number = int(input('Test number: '))
+# nth_cycle = int(input('Cycle: '))
+
+# path = f'./testset/test_{test_number}/cycle_{nth_cycle}/'
+
+# sufixes = ['press','ads','blow','evac']
+
+
+
+def graph():
+    # plot_P_time()
+    # plot_P_column()
+    plot_Tw_time()
+    plot_Tw_column()
+    plot_T_time()
+    plot_T_column()
+    # plot_v_time()
+    # plot_v_column()
+    plot_x_time()
+    plot_x_column()
+    plot_y_time()
+    plot_y_column()
+
+
+t_ads = np.load('t_adsorption.npy')
+P_ad_ads = np.load('P_ad_adsorption.npy')
+T_ad_ads = np.load('T_ad_adsorption.npy')
+v_ad_ads = np.load('v_ad_adsorption.npy')
+y_CO2_ads = np.load('y_CO2_adsorption.npy')
+x_CO2_ads = np.load('x_CO2_adsorption.npy')
+x_N2_ads = np.load('x_N2_adsorption.npy')
+Tw_ad_ads = np.load('Tw_ad_adsorption.npy')
+
+t_heat = np.load('t_heating.npy')
+P_ad_heat = np.load('P_ad_heating.npy')
+T_ad_heat = np.load('T_ad_heating.npy')
+v_ad_heat = np.load('v_ad_heating.npy')
+y_CO2_heat = np.load('y_CO2_heating.npy')
+x_CO2_heat = np.load('x_CO2_heating.npy')
+x_N2_heat = np.load('x_N2_heating.npy')
+Tw_ad_heat = np.load('Tw_ad_heating.npy')
+
+t_cool = np.load('t_cooling.npy')
+P_ad_cool = np.load('P_ad_cooling.npy')
+T_ad_cool = np.load('T_ad_cooling.npy')
+v_ad_cool = np.load('v_ad_cooling.npy')
+y_CO2_cool = np.load('y_CO2_cooling.npy')
+x_CO2_cool = np.load('x_CO2_cooling.npy')
+x_N2_cool = np.load('x_N2_cooling.npy')
+Tw_ad_cool = np.load('Tw_ad_cooling.npy')
+T_ad_cool = np.load('T_ad_cooling.npy')
+
+
+t = np.hstack((t_ads,t_heat+t_ads[-1],t_cool+t_ads[-1]+t_heat[-1]))
+P_ad = np.hstack((P_ad_ads,P_ad_heat,P_ad_cool))
+T_ad = np.hstack((T_ad_ads,T_ad_heat,T_ad_cool))
+v_ad = np.hstack((v_ad_ads,v_ad_heat,v_ad_cool))
+y_CO2 = np.hstack((y_CO2_ads,y_CO2_heat,y_CO2_cool))
+x_CO2 = np.hstack((x_CO2_ads,x_CO2_heat,x_CO2_cool))
+Tw_ad = np.hstack((Tw_ad_ads,Tw_ad_heat,Tw_ad_cool))
+
+
+N_time_steps = len(t)
+N = len(P_ad_ads[:,0])
+z = np.linspace(0,1,N)
+
+graph()
